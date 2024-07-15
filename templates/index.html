@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Mask Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 700px;
+            max-width: 90%;
+        }
+        img {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 640px;
+            height: auto;
+        }
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Face Mask Detection</h1>
+    </header>
+    <main>
+        <div class="container">
+            <p>Ensure your webcam is connected and working. The live video feed will appear below:</p>
+            <img src="{{ url_for('video_feed') }}" alt="Video Feed">
+            <button class="btn" onclick="stopServer()">Stop Server</button>
+        </div>
+    </main>
+    <footer>
+        <p>Developed by Kiran - 2024</p>
+    </footer>
+
+    <script>
+        function stopServer() {
+            fetch('/stop', { method: 'POST' })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    window.location.reload();
+                });
+        }
+    </script>
+</body>
+</html>
